@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+  }
+
+  main{
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 20px;
+  }
+  header{
+    grid-column: 1/3;
+    background-color: #ffffff;
+  }
+  .sideNav{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px 350px 100px 100px;
+    grid-gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  .filterLabel{
+    grid-column: 1/2;
+  }
+  .buttonWrapper{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2,30px);
+    grid-row-gap: 10px;
+    grid-column-gap: 40px;
+  }
+  .buttonContainer{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
+  .details{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
+  .cardWrapper{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  img{
+    width: auto;
+    height: 200px;
+  }
+
+  button{
+    background: #6DE391;
+    border: none;
+    padding: 5px 17px;
+    border-radius: 4px;
+}
+.cardImgContainer{
+  text-align: center;
+  background-color: #f2f2f2;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 2px;
+}
+
+
+/* Media queries */
+
+/* tablet view */
+@media only screen and (min-device-width: 700px) and (max-device-width: 1024px) { 
+  .details{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
+}
+/* mobile view */
+@media only screen and (max-device-width: 700px) {
+  main{
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+  }
+  header{
+    grid-column: 1/1;
+    background-color: #ffffff;
+  }
+  .sideNav{
+    grid-template-columns: auto;
+    grid-template-rows: 50px 350px 100px 100px;
+  }
+  .details{
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+}
