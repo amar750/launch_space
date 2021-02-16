@@ -30,9 +30,9 @@ const DetailsComponent = ({volatile}) => {
                         mission_name={`${mission_name } #${i+1}`}
                         mission_id={mission_id?.join() || 'NA'}
                         launch_year={launch_year || 'NA'}
-                        launch_success={launch_success || 'NA'}
-                        land_success={cores[0]?.land_success || 'NA'}
-                        mission_patch={mission_patch}
+                        launch_success={(launch_success === null && 'NA') || launch_success}
+                        land_success={(cores[0]?.land_success === null && 'NA') || cores[0]?.land_success}
+                        mission_patch={mission_patch?.toString()}
                     />
                 </div>
             )

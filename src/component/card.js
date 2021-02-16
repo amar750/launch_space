@@ -16,8 +16,8 @@ const Card = ({
                 <br/>
                 <label>mission_ids : </label> {mission_id}<br/>
                 <label>Launch year: </label> {launch_year}<br/>
-                <label>Successful launch: </label> {launch_success}<br/>
-                <label>Successful landings: </label>{land_success}<br/>
+                <label>Successful launch: </label> {launch_success?.toString()}<br/>
+                <label>Successful landings: </label>{land_success?.toString()}<br/>
             </div>
             
         </>
