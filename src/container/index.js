@@ -223,8 +223,7 @@ const DetailsContainer = () => {
                    </> 
                 )
             }
-            <footer>Developed by Amar</footer>
-           
+            <div className='footer'>Developed by Amar</div>
         </main>
     )
 }
