@@ -43,9 +43,7 @@ const DetailsContainer = () => {
     },[]);
     const handleClick = (info) => {
         const {data,name} = info || '';
-
         let endPoint = list?.endPoint;
-
         let yearValue = list?.yearValue;
         let launchValue = list?.launchValue;
         let landValue = list?.landValue;
@@ -84,13 +82,18 @@ const DetailsContainer = () => {
                     endPoint = endPointArr.join('&');
                 }
             }
-            else{
+            if(yearValue !== '' && yearValue !==data){
                 let a = endPoint?.split('&') || [];
                 const getValue = (launcY) =>  launcY === `launch_year=${yearValue}`;
                 const index = a.findIndex(getValue);
-                a[index] = `launch_year=${data}`;
-                a = a.join('&');
-                endPoint = a;
+                if(index === -1){
+                  endPoint +=`&launch_year=${Number(data)}`
+                }
+                else{
+                    a[index] = `launch_year=${data}`;
+                    a = a.join('&');
+                    endPoint = a;
+                }
                 activeYear = data;
                 activeYearName = name;
             }
@@ -100,14 +103,14 @@ const DetailsContainer = () => {
             if(launchValue === ''){
                 endPoint += `&launch_success=${data}`;
                 isSuccessfulLaunch = !isSuccessfulLaunch
-                activeLaunch = data;
+                activeLaunch = data.toString();
                 activeLaunchName = name;
             }
-            if(launchValue === data){
+            if(launchValue === data.toString()){
                 isSuccessfulLaunch = !isSuccessfulLaunch;
                 if(isSuccessfulLaunch) {
                     endPoint += `&launch_success=${data}`
-                    activeLaunch = data;
+                    activeLaunch = data.toString();
                     activeLaunchName = name;
                 }
                 else{
@@ -117,30 +120,35 @@ const DetailsContainer = () => {
                     activeLaunchName = '';
                 }
             }
-            else{
+            if(launchValue !== '' && launchValue !== data.toString()){
                 let a = endPoint?.split('&') || [];
                 const getValue = (launchV) =>  launchV === `launch_success=${launchValue}`;
                 const index = a.findIndex(getValue);
-                a[index] = `launch_success=${data}`;
-                a = a.join('&');
-                endPoint = a;
-                activeLaunch =data;
+                if(index === -1){
+                    endPoint += `&launch_success=${data}`
+                }
+                else{
+                    a[index] = `launch_success=${data}`;
+                    a = a.join('&');
+                    endPoint = a;
+                }
+                activeLaunch =data.toString();
                 activeLaunchName = name;
             }
-            launchValue = data;
+            launchValue = data.toString();
         }
         if(name === 'landing'){
             if(landValue === ''){
                 endPoint += `&land_success=${data}`
                 isSuccessfulLanding = !isSuccessfulLanding
-                activeLanding = data;
+                activeLanding = data.toString();
                 activeLandingName = name;
             }
-            if(landValue === data){
+            if(landValue === data.toString()){
                 isSuccessfulLanding = !isSuccessfulLanding;
                 if(isSuccessfulLanding) {
                     endPoint += `&land_success=${data}`
-                    activeLanding = data;
+                    activeLanding = data.toString();
                     activeLandingName = name;
                 }
                 else{
@@ -150,17 +158,22 @@ const DetailsContainer = () => {
                     activeLandingName = '';
                 }
             }
-            else{
+            if(landValue !== '' && landValue !== data.toString()){
                 let a = endPoint?.split('&') || [];
                 const getValue = (launchV) =>  launchV === `land_success=${landValue}`;
                 const index = a.findIndex(getValue);
-                a[index] = `land_success=${data}`;
-                a = a.join('&');
-                endPoint = a;
-                activeLanding =data;
+                if(index === -1){
+                    endPoint += `&land_success=${data}`
+                }
+                else{
+                    a[index] = `land_success=${data}`;
+                    a = a.join('&');
+                    endPoint = a;
+                }
+                activeLanding =data.toString();
                 activeLandingName = name;
             }
-            landValue = data;
+            landValue = data.toString();
         }
         setList((state)=>({
             ...state,
@@ -170,12 +183,12 @@ const DetailsContainer = () => {
             activeYearName,
             activeLanding,
             activeLandingName,
-            yearValue,
             isLaunchYear,
-            launchValue : launchValue,
             isSuccessfulLaunch,
-            landValue,
             isSuccessfulLanding,
+            yearValue : (isLaunchYear && yearValue) || '',
+            launchValue : (isSuccessfulLaunch && launchValue) || '',
+            landValue :(isSuccessfulLanding && landValue) || '',
             endPoint
 
         }));
@@ -184,8 +197,8 @@ const DetailsContainer = () => {
             try {
                 const res =  await getFilteredData(endPoint);
                 const data = await res.json()
-                setVolatile(data)
                 isLoading = false;
+                setVolatile(data)
             } catch (error) {
                 console.log("error", error)
                 isLoading = false;

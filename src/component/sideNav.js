@@ -29,9 +29,9 @@ const RenderLayout = ({
                                 value = {el?.data}
                                 name = {name}
                                 style = {
-                                    ((el.name === 'year' && activeYear === el.data && activeYearName === el.name) ? '#30934E' : '') ||
-                                    ((el.name === 'launch' && activeLaunch === el.data && activeLaunchName === el.name) ? '#30934E' : '') ||
-                                    ((el.name === 'landing' && activeLanding === el.data && activeLandingName === el.name) ? '#30934E' : '')}
+                                    ((el.name === 'year' && activeYear === el.data.toString() && activeYearName === el.name) ? '#30934E' : '') ||
+                                    ((el.name === 'launch' && activeLaunch === el.data.toString() && activeLaunchName === el.name) ? '#30934E' : '') ||
+                                    ((el.name === 'landing' && activeLanding === el.data.toString() && activeLandingName === el.name) ? '#30934E' : '')}
                             />
                         </Fragment>
                     )
